@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./productsSlice";
 
 export const store = configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         products: productsReducer,
     },

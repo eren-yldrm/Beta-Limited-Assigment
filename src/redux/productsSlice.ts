@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ProductService } from "../service/ProductService";
 
 export interface InitialStateI {
@@ -62,6 +62,6 @@ const addToCard = createAsyncThunk("addToCard", async (params: object, ThunkAPI)
     return result;
 });
 
-export { addToCard, getSearchedProducts, getProductList, actions };
+export { actions, addToCard, getProductList, getSearchedProducts };
 
 export default reducer;

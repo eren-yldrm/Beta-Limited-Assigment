@@ -3,11 +3,12 @@ import { Box, Button, IconButton, InputBase, Paper, Stack } from "@mui/material"
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import Logo from "../assets/logo-dark.png";
+import type { AppDispatch } from "../redux";
 import { getSearchedProducts } from "../redux/productsSlice";
 
 export default function SearchBar() {
     const [inputValue, setInputValue] = useState<string>("");
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleSearch = useCallback(() => dispatch(getSearchedProducts({ name: inputValue })), [dispatch, inputValue]);
 

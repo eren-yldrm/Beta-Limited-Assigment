@@ -1,17 +1,16 @@
-import { Container, Stack, Snackbar, Alert } from "@mui/material";
-import { useEffect, useCallback } from "react";
+import { Alert, Container, Snackbar, Stack } from "@mui/material";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./components/ProductCard";
 import SearchBar from "./components/SearchBar";
-import type { RootState } from "./redux";
-import { ProductI, actions as productsActions, getProductList } from "./redux/productsSlice";
+import type { AppDispatch, RootState } from "./redux";
+import { ProductI, getProductList, actions as productsActions } from "./redux/productsSlice";
 import handleSession from "./utils/axiosInstance";
 
 function App() {
+    const dispatch = useDispatch<AppDispatch>();
     const productList = useSelector((state: RootState) => state.products.value);
     const isAdded = useSelector((state: RootState) => state.products.isAdded);
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         async function fetchData() {

@@ -3,7 +3,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Button, Card, CardContent, CardHeader, CardMedia, Chip, IconButton, Rating, Stack, Typography } from "@mui/material";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux";
+import type { AppDispatch, RootState } from "../redux";
 import { ProductI, addToCard, actions as productActions } from "../redux/productsSlice";
 
 type props = {
@@ -11,7 +11,7 @@ type props = {
 };
 
 export default function ProductCard({ cardData }: props) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const amount = useSelector((state: RootState) => state.products.amount);
 
     const increaseAmount = useCallback(() => {
