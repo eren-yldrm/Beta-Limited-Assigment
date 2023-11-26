@@ -14,13 +14,19 @@ export default function ProductCard({ cardData }: props) {
     const dispatch = useDispatch<AppDispatch>();
     const amount = useSelector((state: RootState) => state.products.amount);
 
-    const increaseAmount = useCallback(() => {
-        dispatch(productActions.increaseAmount());
-    }, [dispatch]);
+    const increaseAmount = useCallback(
+        (index: string) => {
+            dispatch(productActions.increaseAmount(index));
+        },
+        [dispatch]
+    );
 
-    const decreaseAmount = useCallback(() => {
-        dispatch(productActions.decreaseAmount());
-    }, [dispatch]);
+    const decreaseAmount = useCallback(
+        (index: string) => {
+            dispatch(productActions.decreaseAmount(index));
+        },
+        [dispatch]
+    );
 
     const handleAddToCard = useCallback((id: string) => dispatch(addToCard({ id })), [dispatch]);
 
@@ -45,15 +51,15 @@ export default function ProductCard({ cardData }: props) {
                         </Button>
                     </Stack>
                     <Stack alignItems="center">
-                        {amount > 0 && (
+                        {amount.value > 0 && amount.index === cardData.id && (
                             <>
-                                <IconButton onClick={decreaseAmount} sx={{ color: "red", border: "1px solid red", borderRadius: 1 }}>
+                                <IconButton onClick={() => decreaseAmount(cardData.id)} sx={{ color: "red", border: "1px solid red", borderRadius: 1 }}>
                                     <RemoveIcon />
                                 </IconButton>
-                                <Typography>{amount}</Typography>
+                                <Typography>{amount.value}</Typography>
                             </>
                         )}
-                        <IconButton onClick={increaseAmount} sx={{ color: "red", border: "1px solid red", borderRadius: 1 }}>
+                        <IconButton onClick={() => increaseAmount(cardData.id)} sx={{ color: "red", border: "1px solid red", borderRadius: 1 }}>
                             <AddIcon />
                         </IconButton>
                     </Stack>

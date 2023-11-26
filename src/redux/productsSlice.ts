@@ -4,10 +4,14 @@ import { ProductService } from "../service/ProductService";
 export interface InitialStateI {
     value: Array<ProductI>;
     searchedProducts: Array<ProductI>;
-    amount: number;
+    amount: AmountI;
     isAdded: boolean;
 }
 
+interface AmountI {
+    value: number;
+    index: string;
+}
 export interface ProductI {
     id: string;
     name: string;
@@ -18,17 +22,19 @@ export interface ProductI {
     discount: string;
 }
 
-const initialState: InitialStateI = { value: [], amount: 0, searchedProducts: [], isAdded: false };
+const initialState: InitialStateI = { value: [], amount: { value: 0, index: "" }, searchedProducts: [], isAdded: false };
 
 const { actions, reducer } = createSlice({
     name: "products",
     initialState,
     reducers: {
-        increaseAmount: (state) => {
-            state.amount++;
+        increaseAmount: (state, actions) => {
+            state.amount.value++;
+            state.amount.index = actions.payload;
         },
-        decreaseAmount: (state) => {
-            state.amount--;
+        decreaseAmount: (state, actions) => {
+            state.amount.value--;
+            state.amount.index = actions.payload;
         },
 
         setProductsData: (state, action) => {

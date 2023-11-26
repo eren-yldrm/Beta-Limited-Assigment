@@ -35,7 +35,7 @@ function App() {
                 </Stack>
                 <Snackbar open={isAdded} autoHideDuration={1500} onClose={handleOnClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                     <Alert severity="success" sx={{ width: "100%" }}>
-                        This is a success message!
+                        Successfully added
                     </Alert>
                 </Snackbar>
             </Container>
